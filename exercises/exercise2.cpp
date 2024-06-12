@@ -1,6 +1,7 @@
 /*
-    The following program takes ina  temperature value in Celsius and converts it to Kelvin.
+    Exercise 2: The following program takes ina  temperature value in Celsius and converts it to Kelvin.
     This code has many errors in it. Find the errors, list them (Ill add a comment) and correct it.
+    Exercise 3: Place a check on the program that will produce an error if a temp given is below -273.15K.
 */
 
 #include <iostream>
@@ -9,22 +10,20 @@ using namespace std;
 
 double ctok(double c)
 {
-    // Error: int changed to double
-    // Error: 273.25 changed to 273.15
     double k = c + 273.15;
-
-    // Error: int changed to k
     return k;
 }
 
 int main(){
     double c = 0;
-    // Error: d changed to c
+    cout << "Please enter a temperature in Celsius: \n";
     cin >> c;
-    // Error: "c" changed to c
-    double k = ctok(c);
+    if (c < -273.15)
+    {
+        cerr << "Error: Please enter a value greater than 0 degrees Kelvin (-273.15C).";
+        return EXIT_FAILURE;
+    }
 
-    // Error: Cout changed to cout 
-    // Error: '/n' changed to '\n'
-    cout << k << '\n';
+    double k = ctok(c);
+    cout << "This is " << k << " degrees Kelvin\n";
 }
