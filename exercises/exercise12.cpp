@@ -66,7 +66,7 @@ int main()
                 cows = 0;
 
                 // Prompt the user for a guess of 4 integers and put those values in a string
-                cout << "Please guess 4 numbers 0-1 (ex: 1234): " << endl;
+                cout << "Please guess 4 numbers 0-9 (ex: 1234): " << endl;
                 string guess;
                 cin >> guess;
                 
