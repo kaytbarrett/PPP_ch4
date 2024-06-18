@@ -35,66 +35,90 @@ vector<int> generateRandNum()
 
 int main() 
 {
-    // Generate a vector of 4 random integers
-    vector<int> numberVec = generateRandNum();
+    // Declare and initialize a boolean to play the game or not
+    bool wantsPlay = true;
 
-    // Declare a vector to store guess integers
-    vector<int> guessVec;
+    // Play the game so long as the bool is true
+    while (wantsPlay){
+        // Ask the user if they want to play and save in a string
+        cout << "Do you want to play a numbers guessing game? (y/n)" << endl;
+        string response;
+        cin >> response;
 
-    // Declare and initialize bull and cow counts
-    int bulls = 0;
-    int cows = 0;
-
-    // Use a while loop to play the game until all 4 integers are guessed in the correct order
-    while (bulls != 4){
-        // Clear the vector of guesses for each iteration
-        guessVec.clear();
-        // Reset bull and cow counts for each iteration
-        bulls = 0; 
-        cows = 0;
-
-        // Prompt the user for a guess of 4 integers and put those values in a string
-        cout << "Please guess 4 numbers 0-1 (ex: 1234): " << endl;
-        string guess;
-        cin >> guess;
-        
-        // Parse the string with substrings to get each individual guess, turn into an int and push into guessVec
-        for(int i = 0; i < guess.length(); i++)
+        if (response == "y")
         {
-            int end = 1;
-            string ss = guess.substr(i,end);
-            int num = stoi(ss);
-            guessVec.push_back(num);
-            end = i+1;
-        }
+            // Generate a vector of 4 random integers
+            vector<int> numberVec = generateRandNum();
 
-        for (int i = 0; i < guessVec.size(); i++ )
-        {
-            // Check if each guess integer matches the number at the same position in the vector
-            if (guessVec[i] == numberVec[i])
-            {
-                // If match is found, incrememt bulls by 1
-                bulls++;
-            }
-            // Check if each guess integer is found somewhere in the number vector, but not at the same position
-            for (int j = 0; j < numberVec.size(); j++ )
-            {
-                if (guessVec[i] == numberVec[j] && i != j )
+            // Declare a vector to store guess integers
+            vector<int> guessVec;
+
+            // Declare and initialize bull and cow counts
+            int bulls = 0;
+            int cows = 0;
+
+            // Use a while loop to play the game until all 4 integers are guessed in the correct order
+            while (bulls != 4){
+                // Clear the vector of guesses for each iteration
+                guessVec.clear();
+                // Reset bull and cow counts for each iteration
+                bulls = 0; 
+                cows = 0;
+
+                // Prompt the user for a guess of 4 integers and put those values in a string
+                cout << "Please guess 4 numbers 0-1 (ex: 1234): " << endl;
+                string guess;
+                cin >> guess;
+                
+                // Parse the string with substrings to get each individual guess, turn into an int and push into guessVec
+                for(int i = 0; i < guess.length(); i++)
                 {
-                    // If the same number is found but in a different position in the vector, increment cows by 1
-                    cows++;
+                    int end = 1;
+                    string ss = guess.substr(i,end);
+                    int num = stoi(ss);
+                    guessVec.push_back(num);
+                    end = i+1;
                 }
-            }
-        }
 
-        // Output based on number of bulls found in guessVec
-        if (bulls == 4){
-            cout << "Correct! The number is: " << guess << endl;
+                for (int i = 0; i < guessVec.size(); i++ )
+                {
+                    // Check if each guess integer matches the number at the same position in the vector
+                    if (guessVec[i] == numberVec[i])
+                    {
+                        // If match is found, incrememt bulls by 1
+                        bulls++;
+                    }
+                    // Check if each guess integer is found somewhere in the number vector, but not at the same position
+                    for (int j = 0; j < numberVec.size(); j++ )
+                    {
+                        if (guessVec[i] == numberVec[j] && i != j )
+                        {
+                            // If the same number is found but in a different position in the vector, increment cows by 1
+                            cows++;
+                        }
+                    }
+                }
 
-        } else {
-            cout << bulls << " bulls and " << cows << " cows" << endl;
+                // Output based on number of bulls found in guessVec
+                if (bulls == 4){
+                    cout << "Correct! The number is: " << guess << endl;
+
+                } else {
+                    cout << bulls << " bulls and " << cows << " cows" << endl;
+                }
+
+            } 
+        } else if (response == "n")
+        {
+            cout << "Thanks for playing!" << endl;
+            // Set the bool to false to terminate the while loop
+            wantsPlay = false;
+        } else
+        {
+            cerr << "Error: Invalid Input." << endl;
+            exit(EXIT_FAILURE);
         }
-    }  
+    }
 
     return 0;
 }
