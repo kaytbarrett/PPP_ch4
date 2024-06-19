@@ -50,6 +50,9 @@ int main()
 
         if (response == "y")
         {
+            // Reset guess counter for each game
+            guessCounter = 0;
+            
             // Generate a vector of 4 random integers
             vector<int> numberVec = generateRandNum();
 
