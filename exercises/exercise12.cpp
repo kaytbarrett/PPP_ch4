@@ -38,6 +38,9 @@ int main()
     // Declare and initialize a boolean to play the game or not
     bool wantsPlay = true;
 
+    // Declare and initialize a guess counter
+    int guessCounter = 0;
+
     // Play the game so long as the bool is true
     while (wantsPlay){
         // Ask the user if they want to play and save in a string
@@ -99,10 +102,13 @@ int main()
                     }
                 }
 
+                // Increment the guess counter by 1 each loop
+                guessCounter++;
+
                 // Output based on number of bulls found in guessVec
                 if (bulls == 4){
                     cout << "Correct! The number is: " << guess << endl;
-
+                    cout << "Guess counter: " << guessCounter << endl;
                 } else {
                     cout << bulls << " bulls and " << cows << " cows" << endl;
                 }
